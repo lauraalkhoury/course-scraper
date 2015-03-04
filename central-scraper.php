@@ -15,8 +15,21 @@ $end_crn   = 15339;
 
 $database = new medoo();
 
-/* only loop over first ~100 courses for now - slow :( */
-for ($x = $start_crn; $x <= 10100; $x++) {
+$database->query("DROP TABLE IF EXISTS courses;");
+$database->query("CREATE TABLE IF NOT EXISTS courses(
+				      crn integer primary key NOT NULL,
+				      term text NOT NULL,
+				      subject text NOT NULL,
+				      title text NOT NULL,
+				      description text NOT NULL
+				      );");
+
+$err = $database->error();
+if ($err[2] != NULL) {
+	exit("Database error: " . $err[2] . PHP_EOL);
+}
+
+for ($x = $start_crn; $x <= $end_crn; $x++) {
 
 	echo "Current CRN:  " . $x . PHP_EOL;
 
@@ -41,7 +54,9 @@ for ($x = $start_crn; $x <= 10100; $x++) {
 	]);
 }
 
-/* print db errors */
-print_r(var_dump($database->error()));
+$err = $database->error();
+if ($err[2] != NULL) {
+	exit("Database error: " . $err[2] . PHP_EOL);
+}
 
 ?>
