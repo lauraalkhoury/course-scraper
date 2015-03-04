@@ -10,21 +10,21 @@
 class medoo
 {
 	// General
-	protected $database_type = 'sqlite';
+	protected $database_type = 'mysql';
 
 	protected $charset;
 
-	protected $database_name;
+	protected $database_name = 'courses';
 
 	// For MySQL, MariaDB, MSSQL, Sybase, PostgreSQL, Oracle
-	protected $server;
+	protected $server = 'localhost';
 
-	protected $username;
+	protected $username = 'root';
 
-	protected $password;
+	protected $password = 'root password goes here';
 
 	// For SQLite
-	protected $database_file = 'study-buddy';
+	protected $database_file;
 
 	// For MySQL or MariaDB with unix_socket
 	protected $socket;
